@@ -122,7 +122,7 @@ public class HospitalService {
                 default:
                     System.out.println("HATALI GİRİŞ, TEKRAR DENEYİNİZ...\n");
             }
-        } while ();
+        } while (secim != -1);
     }
 
     public void contactUs() throws IOException, InterruptedException, IllegalStateException, SQLException {
