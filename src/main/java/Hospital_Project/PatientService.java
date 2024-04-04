@@ -180,4 +180,15 @@ public class PatientService implements Methods{
             patientCaseList.add(findPatientCase(w.toLowerCase()));
         }
     }
+
+    @Override
+    public boolean exitStatus(boolean status) {
+        return status;
+    }
+
+    @Override
+    public String inputHandler(String obj) {
+        obj = scan.nextLine();
+        return obj;
+    }
 }

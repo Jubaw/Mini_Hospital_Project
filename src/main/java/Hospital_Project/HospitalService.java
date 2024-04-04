@@ -8,6 +8,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
+
 public class HospitalService {
     static Scanner scan = new Scanner(System.in);
     public static Hospital hospital = new Hospital();
@@ -19,42 +20,42 @@ public class HospitalService {
 
         int secim = -1;
 
-     do {
-         System.out.println("""
-                 Lütfen giriş yapmak istediğiniz menü kodunu giriniz..
+        do {
+            System.out.println("""
+                    Lütfen giriş yapmak istediğiniz menü kodunu giriniz..
 
-                 1-HASTANE YÖNETİCİSİ GİRİŞİ
-                 2-DOKTOR GİRİŞİ
-                 3-HASTA GİRİŞİ
-                 4-HASTANE KADROMUZ
-                 0-ÇIKIŞ""");
+                    1-HASTANE YÖNETİCİSİ GİRİŞİ
+                    2-DOKTOR GİRİŞİ
+                    3-HASTA GİRİŞİ
+                    4-HASTANE KADROMUZ
+                    0-ÇIKIŞ""");
 
-        try {
-            secim = scan.nextInt();
-        } catch (Exception e) {
-            scan.nextLine();
-            System.out.println("LUTFEN SIZE SUNULAN SECENEKLERIN DISINDA VERI GIRISI YAPMAYINIZ!");
-        }
-        switch (secim) {
-            case 1:
-                hospitalService.hospitalServiceMenu();
-                break;
-            case 2:
-                doctorService.entryMenu();
-                break;
-            case 3:
-                patientService.entryMenu();
-                break;
-            case 4:
-                contactUs();
-                break;
-            case 0:
-                exit();
-                break;
-            default:
-                System.out.println("HATALI GIRIS, TEKRAR DENEYINIZ!");
-        }
-     } while (secim!=0);
+            try {
+                secim = scan.nextInt();
+            } catch (Exception e) {
+                scan.nextLine();
+                System.out.println("LUTFEN SIZE SUNULAN SECENEKLERIN DISINDA VERI GIRISI YAPMAYINIZ!");
+            }
+            switch (secim) {
+                case 1:
+                    hospitalService.hospitalServiceMenu();
+                    break;
+                case 2:
+                    doctorService.entryMenu();
+                    break;
+                case 3:
+                    patientService.entryMenu();
+                    break;
+                case 4:
+                    contactUs();
+                    break;
+                case 0:
+                    exit();
+                    break;
+                default:
+                    System.out.println("HATALI GIRIS, TEKRAR DENEYINIZ!");
+            }
+        } while (secim != 0);
 
     }
 
@@ -121,11 +122,11 @@ public class HospitalService {
                 default:
                     System.out.println("HATALI GİRİŞ, TEKRAR DENEYİNİZ...\n");
             }
-        } while (secim != 0);
+        } while ();
     }
 
     public void contactUs() throws IOException, InterruptedException, IllegalStateException, SQLException {
-        Files.lines(Paths.get("src/Hospital_Project/Yonetim.txt")).forEach(System.out::println);
+        Files.lines(Paths.get("src/main/java/Hospital_Project/Yonetim.txt")).forEach(System.out::println);
         start();
     }
 
@@ -157,11 +158,11 @@ public class HospitalService {
         //bağlantı kaç defa oluşturulmalı ve nerelerde?
 
         try {
-            Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/hospital_dev02","dev02","123456");
+            Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/hospital_dev02", "dev02", "123456");
 
             Statement st = con.createStatement();
 
-           boolean sql1 = st.execute("CREATE TABLE IF NOT EXISTS doctors(doctor_id SERIAL PRIMARY KEY, doctor_name VARCHAR(50), doctor_surname VARCHAR(50), " +
+            boolean sql1 = st.execute("CREATE TABLE IF NOT EXISTS doctors(doctor_id SERIAL PRIMARY KEY, doctor_name VARCHAR(50), doctor_surname VARCHAR(50), " +
                     "doctor_title VARCHAR(50))");
 
             System.out.println(sql1);
@@ -175,9 +176,6 @@ public class HospitalService {
                     "FOREIGN KEY(doctor_id) REFERENCES doctors(doctor_id), FOREIGN KEY(patient_id) REFERENCES patients(patient_id))";
 
             st.execute(sql3);
-
-
-
 
 
             st.close();
